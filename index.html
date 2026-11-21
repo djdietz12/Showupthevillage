@@ -27,6 +27,19 @@ article:hover{box-shadow:0 0 0 4px #F7E1E3}
 .tab[aria-current="page"]{background:#F7E1E3}
 .panel{display:none}.panel.on{display:block}
 html{scroll-padding-top:90px}
+
+dialog#reserve{border:1px solid #2F2F2F;padding:0;max-width:440px;width:calc(100% - 32px);background:#F5F0E8;color:#2F2F2F;font-family:Archivo,'Helvetica Neue',Arial,sans-serif}
+dialog#reserve::backdrop{background:rgba(47,47,47,.55)}
+#reserve form,#r-done{padding:28px;position:relative}
+#reserve h2{font-family:Spectral,Georgia,serif;font-weight:800;font-size:34px;line-height:1.05;margin:0 0 4px}
+#reserve .r-item{font-family:Sacramento,cursive;font-size:28px;line-height:1.1;margin:0 0 18px}
+#reserve label{display:block;font-weight:800;font-size:14px;letter-spacing:.04em;margin:14px 0 6px}
+#reserve input,#reserve select{box-sizing:border-box;width:100%;min-height:48px;font:16px Archivo,sans-serif;padding:10px 12px;border:1px solid #2F2F2F;background:#fff;color:#2F2F2F;border-radius:0}
+#reserve input:focus,#reserve select:focus{outline:3px solid #F7E1E3;outline-offset:1px}
+#reserve .r-send{display:block;width:100%;margin-top:22px;background:#2F2F2F;color:#F5F0E8;border:0;font:800 15px Archivo,sans-serif;letter-spacing:.16em;padding:16px;cursor:pointer}
+#reserve .r-send[disabled]{opacity:.6;cursor:wait}
+#reserve .r-x{position:absolute;top:10px;right:12px;width:44px;height:44px;border:0;background:transparent;font-size:30px;line-height:1;cursor:pointer;color:#2F2F2F}
+#reserve .r-status{min-height:1.4em;margin:12px 0 0;font-size:15px}
 </style>
 </head>
 <body>
@@ -218,7 +231,7 @@ html{scroll-padding-top:90px}
               <div style="padding: 18px; display: flex; flex-direction: column; gap: 4px; flex: 1">
                 <h3 style="margin: 0; font-size: 18px; font-weight: 800">SHOW UP tee</h3>
                 <p style="margin: 0 0 14px; font-size: 15px; color: #5E5850">$30</p>
-                <a class="btn" href="https://[YOUR-MERCH-LINK]" style="margin-top: auto; display: block; text-align: center; background: #2F2F2F; color: #F5F0E8; text-decoration: none; font-weight: 800; letter-spacing: 0.16em; padding: 13px; font-size: 14px; transition: transform .15s">SHOP</a>
+                <button class="btn reserve" type="button" data-item="SHOW UP tee" style="margin-top: auto; display: block; text-align: center; background: #2F2F2F; color: #F5F0E8; text-decoration: none; font-weight: 800; letter-spacing: 0.16em; padding: 13px; font-size: 14px; transition: transform .15s; width: 100%; border: 0; cursor: pointer; font-family: Archivo, sans-serif">RESERVE</button>
               </div>
             </article>
           
@@ -233,7 +246,7 @@ html{scroll-padding-top:90px}
               <div style="padding: 18px; display: flex; flex-direction: column; gap: 4px; flex: 1">
                 <h3 style="margin: 0; font-size: 18px; font-weight: 800">What, like it’s hard? cropped tank</h3>
                 <p style="margin: 0 0 14px; font-size: 15px; color: #5E5850">$25</p>
-                <a class="btn" href="https://[YOUR-MERCH-LINK]" style="margin-top: auto; display: block; text-align: center; background: #2F2F2F; color: #F5F0E8; text-decoration: none; font-weight: 800; letter-spacing: 0.16em; padding: 13px; font-size: 14px; transition: transform .15s">SHOP</a>
+                <button class="btn reserve" type="button" data-item="What, like it’s hard? cropped tank" style="margin-top: auto; display: block; text-align: center; background: #2F2F2F; color: #F5F0E8; text-decoration: none; font-weight: 800; letter-spacing: 0.16em; padding: 13px; font-size: 14px; transition: transform .15s; width: 100%; border: 0; cursor: pointer; font-family: Archivo, sans-serif">RESERVE</button>
               </div>
             </article>
           
@@ -248,7 +261,7 @@ html{scroll-padding-top:90px}
               <div style="padding: 18px; display: flex; flex-direction: column; gap: 4px; flex: 1">
                 <h3 style="margin: 0; font-size: 18px; font-weight: 800">I am someone’s mom cropped tank</h3>
                 <p style="margin: 0 0 14px; font-size: 15px; color: #5E5850">$25</p>
-                <a class="btn" href="https://[YOUR-MERCH-LINK]" style="margin-top: auto; display: block; text-align: center; background: #2F2F2F; color: #F5F0E8; text-decoration: none; font-weight: 800; letter-spacing: 0.16em; padding: 13px; font-size: 14px; transition: transform .15s">SHOP</a>
+                <button class="btn reserve" type="button" data-item="I am someone’s mom cropped tank" style="margin-top: auto; display: block; text-align: center; background: #2F2F2F; color: #F5F0E8; text-decoration: none; font-weight: 800; letter-spacing: 0.16em; padding: 13px; font-size: 14px; transition: transform .15s; width: 100%; border: 0; cursor: pointer; font-family: Archivo, sans-serif">RESERVE</button>
               </div>
             </article>
           
@@ -260,7 +273,7 @@ html{scroll-padding-top:90px}
               <div style="padding: 18px; display: flex; flex-direction: column; gap: 4px; flex: 1">
                 <h3 style="margin: 0; font-size: 18px; font-weight: 800">VILLAGE hat</h3>
                 <p style="margin: 0 0 14px; font-size: 15px; color: #5E5850">$30</p>
-                <a class="btn" href="https://[YOUR-MERCH-LINK]" style="margin-top: auto; display: block; text-align: center; background: #2F2F2F; color: #F5F0E8; text-decoration: none; font-weight: 800; letter-spacing: 0.16em; padding: 13px; font-size: 14px; transition: transform .15s">SHOP</a>
+                <button class="btn reserve" type="button" data-item="VILLAGE hat" style="margin-top: auto; display: block; text-align: center; background: #2F2F2F; color: #F5F0E8; text-decoration: none; font-weight: 800; letter-spacing: 0.16em; padding: 13px; font-size: 14px; transition: transform .15s; width: 100%; border: 0; cursor: pointer; font-family: Archivo, sans-serif">RESERVE</button>
               </div>
             </article>
           
@@ -285,6 +298,74 @@ html{scroll-padding-top:90px}
     if(ids.indexOf(h)>-1) window.scrollTo(0,0);
   }
   window.addEventListener('hashchange',show); show();
+})();
+</script>
+
+<dialog id="reserve" aria-labelledby="r-title">
+  <form id="r-form" method="POST" action="https://formsubmit.co/djdietz12@gmail.com">
+    <button type="button" class="r-x" id="r-close" aria-label="Close">&times;</button>
+    <h2 id="r-title">Reserve</h2>
+    <p class="r-item" id="r-item-label"></p>
+    <input type="hidden" name="Item" id="r-item">
+    <input type="hidden" name="_subject" id="r-subject" value="Village 5K merch reservation">
+    <input type="hidden" name="_template" value="table">
+    <input type="hidden" name="_captcha" value="false">
+    <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+    <label for="r-name">Name</label>
+    <input id="r-name" name="Name" type="text" autocomplete="name" required>
+    <label for="r-phone">Phone number</label>
+    <input id="r-phone" name="Phone" type="tel" autocomplete="tel" inputmode="tel" required>
+    <div id="r-size-wrap">
+      <label for="r-size">Size</label>
+      <select id="r-size" name="Size" required>
+        <option value="">Choose a size</option>
+        <option>XS</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>XXL</option>
+      </select>
+    </div>
+    <button type="submit" class="btn r-send" id="r-send">SEND RESERVATION</button>
+    <p class="r-status" id="r-status" role="status"></p>
+  </form>
+  <div id="r-done" hidden>
+    <h2>You’re on the list!</h2>
+    <p id="r-done-msg"></p>
+    <button type="button" class="btn r-send" id="r-done-close">DONE</button>
+  </div>
+</dialog>
+
+<script>
+(function(){
+  var d=document.getElementById('reserve'),f=document.getElementById('r-form'),st=document.getElementById('r-status'),
+      send=document.getElementById('r-send'),done=document.getElementById('r-done'),sizeWrap=document.getElementById('r-size-wrap'),
+      size=document.getElementById('r-size');
+  function open(item){
+    f.reset();f.hidden=false;done.hidden=true;st.textContent='';send.disabled=false;
+    document.getElementById('r-item').value=item;
+    document.getElementById('r-item-label').textContent=item;
+    document.getElementById('r-subject').value='Village 5K merch reservation: '+item;
+    var hat=/ hat$/i.test(item);sizeWrap.hidden=hat;size.required=!hat;
+    if(d.showModal)d.showModal();else d.setAttribute('open','');
+    setTimeout(function(){document.getElementById('r-name').focus()},50);
+  }
+  function close(){if(d.close)d.close();else d.removeAttribute('open')}
+  document.querySelectorAll('.reserve').forEach(function(b){b.addEventListener('click',function(){open(b.dataset.item)})});
+  document.getElementById('r-close').addEventListener('click',close);
+  document.getElementById('r-done-close').addEventListener('click',close);
+  d.addEventListener('click',function(e){if(e.target===d)close()});
+  f.addEventListener('submit',function(e){
+    e.preventDefault();
+    var data={};new FormData(f).forEach(function(v,k){data[k]=v});
+    if(sizeWrap.hidden)data.Size='One size';
+    send.disabled=true;st.textContent='Sending…';
+    fetch('https://formsubmit.co/ajax/djdietz12@gmail.com',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(data)})
+      .then(function(r){return r.json()})
+      .then(function(j){
+        if(String(j.success)==='true'){
+          f.hidden=true;done.hidden=false;
+          document.getElementById('r-done-msg').textContent='We got your reservation for the '+data.Item+(data.Size&&data.Size!=='One size'?' (size '+data.Size+')':'')+'. We’ll reach out at '+data.Phone+' to confirm.';
+        } else throw new Error(j.message||'failed');
+      })
+      .catch(function(){send.disabled=false;st.textContent='Sorry, that didn’t go through. Please try again, or email djdietz12@gmail.com.'});
+  });
 })();
 </script>
 </body>
