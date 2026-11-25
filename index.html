@@ -387,11 +387,11 @@ dialog#reserve::backdrop{background:rgba(47,47,47,.55)}
         <option>XS</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>XXL</option>
       </select>
     </div>
-    <button type="submit" class="btn r-send" id="r-send">SEND RESERVATION</button>
+    <button type="submit" class="btn r-send" id="r-send">CONTINUE TO EMAIL</button>
     <p class="r-status" id="r-status" role="status"></p>
   </form>
   <div id="r-done" hidden>
-    <h2>You’re on the list!</h2>
+    <h2>Almost done!</h2>
     <p id="r-done-msg"></p>
     <button type="button" class="btn r-send" id="r-done-close">DONE</button>
   </div>
@@ -420,16 +420,11 @@ dialog#reserve::backdrop{background:rgba(47,47,47,.55)}
     e.preventDefault();
     var data={};new FormData(f).forEach(function(v,k){data[k]=v});
     if(sizeWrap.hidden)data.Size='One size';
-    send.disabled=true;st.textContent='Sending…';
-    fetch('https://formsubmit.co/ajax/djdietz12@gmail.com',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(data)})
-      .then(function(r){return r.json()})
-      .then(function(j){
-        if(String(j.success)==='true'){
-          f.hidden=true;done.hidden=false;
-          document.getElementById('r-done-msg').textContent='We got your reservation for the '+data.Item+(data.Size&&data.Size!=='One size'?' (size '+data.Size+')':'')+'. We’ll reach out at '+data.Phone+' to confirm.';
-        } else throw new Error(j.message||'failed');
-      })
-      .catch(function(){send.disabled=false;st.textContent='Sorry, that didn’t go through. Please try again, or email djdietz12@gmail.com.'});
+    var lines=['Item: '+data.Item,'Name: '+data.Name,'Phone: '+data.Phone,'Size: '+(data.Size||'One size')];
+    var url='mailto:djdietz12@gmail.com?subject='+encodeURIComponent('Village 5K merch reservation: '+data.Item)+'&body='+encodeURIComponent('Hi! I would like to reserve:\n\n'+lines.join('\n')+'\n\nThank you!');
+    f.hidden=true;done.hidden=false;
+    document.getElementById('r-done-msg').innerHTML='Your email app should open with your reservation filled in. <strong>Just tap Send</strong> and we’ll reach out at '+data.Phone.replace(/[<>&]/g,'')+' to confirm.<br><br>If nothing opens, email <a href="mailto:djdietz12@gmail.com">djdietz12@gmail.com</a> with your name, phone, item and size.';
+    window.location.href=url;
   });
 })();
 </script>
