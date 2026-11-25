@@ -367,10 +367,11 @@ dialog#reserve::backdrop{background:rgba(47,47,47,.55)}
 </script>
 
 <dialog id="reserve" aria-labelledby="r-title">
-  <form id="r-form" method="POST" action="https://formsubmit.co/djdietz12@gmail.com">
+  <form id="r-form" method="POST" action="https://api.web3forms.com/submit">
     <button type="button" class="r-x" id="r-close" aria-label="Close">&times;</button>
     <h2 id="r-title">Reserve</h2>
     <p class="r-item" id="r-item-label"></p>
+    <input type="hidden" name="access_key" value="9c775dde-7630-4915-96b9-8432767d83c4">
     <input type="hidden" name="Item" id="r-item">
     <input type="hidden" name="_subject" id="r-subject" value="Village 5K merch reservation">
     <input type="hidden" name="_template" value="table">
@@ -387,11 +388,11 @@ dialog#reserve::backdrop{background:rgba(47,47,47,.55)}
         <option>XS</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>XXL</option>
       </select>
     </div>
-    <button type="submit" class="btn r-send" id="r-send">CONTINUE TO EMAIL</button>
+    <button type="submit" class="btn r-send" id="r-send">SEND RESERVATION</button>
     <p class="r-status" id="r-status" role="status"></p>
   </form>
   <div id="r-done" hidden>
-    <h2>Almost done!</h2>
+    <h2>You’re on the list!</h2>
     <p id="r-done-msg"></p>
     <button type="button" class="btn r-send" id="r-done-close">DONE</button>
   </div>
@@ -420,11 +421,19 @@ dialog#reserve::backdrop{background:rgba(47,47,47,.55)}
     e.preventDefault();
     var data={};new FormData(f).forEach(function(v,k){data[k]=v});
     if(sizeWrap.hidden)data.Size='One size';
-    var lines=['Item: '+data.Item,'Name: '+data.Name,'Phone: '+data.Phone,'Size: '+(data.Size||'One size')];
-    var url='mailto:djdietz12@gmail.com?subject='+encodeURIComponent('Village 5K merch reservation: '+data.Item)+'&body='+encodeURIComponent('Hi! I would like to reserve:\n\n'+lines.join('\n')+'\n\nThank you!');
-    f.hidden=true;done.hidden=false;
-    document.getElementById('r-done-msg').innerHTML='Your email app should open with your reservation filled in. <strong>Just tap Send</strong> and we’ll reach out at '+data.Phone.replace(/[<>&]/g,'')+' to confirm.<br><br>If nothing opens, email <a href="mailto:djdietz12@gmail.com">djdietz12@gmail.com</a> with your name, phone, item and size.';
-    window.location.href=url;
+    var payload={access_key:'9c775dde-7630-4915-96b9-8432767d83c4',subject:'Village 5K merch reservation: '+data.Item,from_name:'Village 5K website',Item:data.Item,Name:data.Name,Phone:data.Phone,Size:data.Size||'One size',botcheck:''};
+    send.disabled=true;st.textContent='Sending…';
+    var ctl=window.AbortController?new AbortController():null;var tm=setTimeout(function(){if(ctl)ctl.abort()},20000);
+    fetch('https://api.web3forms.com/submit',{method:'POST',signal:ctl?ctl.signal:undefined,headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(payload)})
+      .then(function(r){return r.json()})
+      .then(function(j){
+        clearTimeout(tm);
+        if(j&&j.success){
+          f.hidden=true;done.hidden=false;
+          document.getElementById('r-done-msg').textContent='We got your reservation for the '+data.Item+(payload.Size!=='One size'?' (size '+payload.Size+')':'')+'. We’ll reach out at '+data.Phone+' to confirm.';
+        } else throw new Error((j&&j.message)||'failed');
+      })
+      .catch(function(){clearTimeout(tm);send.disabled=false;st.innerHTML='Sorry, that didn’t go through. Please try again, or email <a href="mailto:djdietz12@gmail.com">djdietz12@gmail.com</a>.'});
   });
 })();
 </script>
